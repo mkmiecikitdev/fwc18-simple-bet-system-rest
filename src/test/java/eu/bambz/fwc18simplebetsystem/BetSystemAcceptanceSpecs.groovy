@@ -7,10 +7,10 @@ class BetSystemAcceptanceSpecs extends Specification{
     def "scenarios" () {
 
         when: 'I get /matches'
-        then: 'I see all matches with dates, results, bets, points and flag that possible is betting each match'
+        then: 'I see all matches'
 
         when 'I get /points'
-        then: 'I see current points for me and second player (Tomek)'
+        then: 'I see current points for me and second player'
 
         when 'I put /match/{id} when can updating this match'
         then 'I get updated match and 200'
