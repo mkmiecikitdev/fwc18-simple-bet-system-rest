@@ -4,7 +4,7 @@ import lombok.Value;
 
 
 @Value
-class TeamScoreSection {
+class TeamScoreView {
 
     private final TeamType teamType;
     private final Integer score;

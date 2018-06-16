@@ -13,8 +13,8 @@ public class BetDto {
     private LocalDateTime time;
     private TeamDto team1;
     private TeamDto team2;
-    private PlayerScoreDto player1;
-    private PlayerScoreDto player2;
+    private PlayerBetDto player1;
+    private PlayerBetDto player2;
     private boolean canBet;
 
 }

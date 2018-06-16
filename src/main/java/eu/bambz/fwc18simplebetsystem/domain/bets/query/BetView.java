@@ -1,9 +1,10 @@
 package eu.bambz.fwc18simplebetsystem.domain.bets.query;
 
 import eu.bambz.fwc18simplebetsystem.domain.bets.api.BetDto;
-import eu.bambz.fwc18simplebetsystem.domain.bets.api.PlayerScoreDto;
+import eu.bambz.fwc18simplebetsystem.domain.bets.api.PlayerBetDto;
 import eu.bambz.fwc18simplebetsystem.domain.bets.api.TeamDto;
 import eu.bambz.fwc18simplebetsystem.domain.bets.shared.MatchTime;
+import eu.bambz.fwc18simplebetsystem.domain.players.api.PlayerType;
 import lombok.Builder;
 
 import java.time.LocalDateTime;
@@ -14,29 +15,29 @@ class BetView {
     private long id;
     private MatchTime time;
 
-    private TeamScoreSection teamSection1;
-    private TeamScoreSection teamSection2;
+    private TeamScoreView team1View;
+    private TeamScoreView team2View;
 
-    private PlayerBetSection playerBetSection1;
-    private PlayerBetSection playerBetSection2;
+    private PlayerBetsView player1BetView;
+    private PlayerBetsView player2BetView;
 
 
     BetDto dto(LocalDateTime now) {
-        TeamDto teamDto1 = new TeamDto(teamSection1.getTeamType().getLabel(), teamSection1.getScore());
-        TeamDto teamDto2 = new TeamDto(teamSection2.getTeamType().getLabel(), teamSection2.getScore());
+        TeamDto teamDto1 = new TeamDto(team1View.getTeamType().getLabel(), team1View.getScore());
+        TeamDto teamDto2 = new TeamDto(team2View.getTeamType().getLabel(), team2View.getScore());
 
-        PlayerScoreDto playerScoreDto1 = PlayerScoreDto.builder()
-                .name(playerBetSection1.getPlayerName())
-                .team1Bet(playerBetSection1.getTeam1Bet())
-                .team2Bet(playerBetSection1.getTeam2Bet())
-                .score(playerBetSection1.calculateScore(teamDto1.getScore(), teamDto2.getScore()).getOrNull())
+        PlayerBetDto playerBetDto1 = PlayerBetDto.builder()
+                .name(PlayerType.M.getLabel())
+                .team1Bet(player1BetView.getTeam1Bet())
+                .team2Bet(player1BetView.getTeam2Bet())
+                .score(player1BetView.calculateScore(teamDto1.getScore(), teamDto2.getScore()).getOrNull())
                 .build();
 
-        PlayerScoreDto playerScoreDto2 = PlayerScoreDto.builder()
-                .name(playerBetSection2.getPlayerName())
-                .team1Bet(playerBetSection2.getTeam1Bet())
-                .team2Bet(playerBetSection2.getTeam2Bet())
-                .score(playerBetSection2.calculateScore(teamDto1.getScore(), teamDto2.getScore()).getOrNull())
+        PlayerBetDto playerBetDto2 = PlayerBetDto.builder()
+                .name(PlayerType.T.getLabel())
+                .team1Bet(player2BetView.getTeam1Bet())
+                .team2Bet(player2BetView.getTeam2Bet())
+                .score(player2BetView.calculateScore(teamDto1.getScore(), teamDto2.getScore()).getOrNull())
                 .build();
 
         return BetDto.builder()
@@ -44,8 +45,8 @@ class BetView {
                 .time(time.getTime())
                 .team1(teamDto1)
                 .team2(teamDto2)
-                .player1(playerScoreDto1)
-                .player2(playerScoreDto2)
+                .player1(playerBetDto1)
+                .player2(playerBetDto2)
                 .canBet(time.canBet(now))
                 .build();
 

@@ -14,19 +14,19 @@ public class InMemoryBetsQueryRepository implements BetsQueryRepository {
     private final static BetView MATCH_1 = BetView.builder()
             .id(1L)
             .time(new MatchTime(LocalDateTime.of(2018, 6, 14, 18, 0)))
-            .teamSection1(new TeamScoreSection(TeamType.RUS, 5))
-            .teamSection2(new TeamScoreSection(TeamType.ARA, 0))
-            .playerBetSection1(new PlayerBetSection("Michal", 5, 0))
-            .playerBetSection2(new PlayerBetSection("Tomek", 2, 1))
+            .team1View(new TeamScoreView(TeamType.RUS, 5))
+            .team2View(new TeamScoreView(TeamType.ARA, 0))
+            .player1BetView(new PlayerBetsView(5, 0))
+            .player2BetView(new PlayerBetsView(2, 1))
             .build();
 
     private final static BetView MATCH_2 = BetView.builder()
             .id(2L)
             .time(new MatchTime(LocalDateTime.of(2018, 6, 15, 14, 0)))
-            .teamSection1(new TeamScoreSection(TeamType.EGI, null))
-            .teamSection2(new TeamScoreSection(TeamType.URU, null))
-            .playerBetSection1(new PlayerBetSection("Michal", 2, 0))
-            .playerBetSection2(new PlayerBetSection("Tomek", 0, 1))
+            .team1View(new TeamScoreView(TeamType.EGI, null))
+            .team2View(new TeamScoreView(TeamType.URU, null))
+            .player1BetView(new PlayerBetsView(2, 0))
+            .player2BetView(new PlayerBetsView(0, 1))
             .build();
 
     private static Map<Long, BetView> MAP = HashMap.of(1L, MATCH_1, 2L, MATCH_2);
@@ -48,19 +48,19 @@ public class InMemoryBetsQueryRepository implements BetsQueryRepository {
                 .map(b -> b.dto(now));
     }
 
-    public void saveDto(long id, Tuple4<Integer,Integer,Integer,Integer> newBets) {
+    public void saveDto(long id, Tuple4<Integer, Integer, Integer, Integer> newBets) {
         BetDto updatedDto = MAP.get(id).get().dto(LocalDateTime.now());
 
-        PlayerBetSection playerBetSection1 = new PlayerBetSection(updatedDto.getPlayer1().getName(), newBets._1(), newBets._2());
-        PlayerBetSection playerBetSection2 = new PlayerBetSection(updatedDto.getPlayer2().getName(), newBets._3(), newBets._4());
+        PlayerBetsView playerBetsView1 = new PlayerBetsView(newBets._1(), newBets._2());
+        PlayerBetsView playerBetsView2 = new PlayerBetsView(newBets._3(), newBets._4());
 
         BetView betView = BetView.builder()
                 .id(id)
                 .time(new MatchTime(updatedDto.getTime()))
-                .teamSection1(new TeamScoreSection(teamType(updatedDto.getTeam1().getName()), updatedDto.getTeam1().getScore()))
-                .teamSection2(new TeamScoreSection(teamType(updatedDto.getTeam2().getName()), updatedDto.getTeam2().getScore()))
-                .playerBetSection1(playerBetSection1)
-                .playerBetSection2(playerBetSection2)
+                .team1View(new TeamScoreView(teamType(updatedDto.getTeam1().getName()), updatedDto.getTeam1().getScore()))
+                .team2View(new TeamScoreView(teamType(updatedDto.getTeam2().getName()), updatedDto.getTeam2().getScore()))
+                .player1BetView(playerBetsView1)
+                .player2BetView(playerBetsView2)
                 .build();
 
         MAP = MAP.put(id, betView);

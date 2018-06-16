@@ -5,7 +5,7 @@ import io.vavr.control.Option;
 import lombok.Value;
 
 @Value
-class PlayerBetSection {
+class PlayerBetsView {
 
     private static final int SCORE_MAX = 3;
     private static final int SCORE_STANDARD = 1;
@@ -13,7 +13,6 @@ class PlayerBetSection {
 
     private enum Result { WIN, LOSE, DRAW }
 
-    private final String playerName;
     private final Integer team1Bet;
     private final Integer team2Bet;
 
@@ -44,7 +43,5 @@ class PlayerBetSection {
 
         return Result.LOSE;
     }
-
-
 
 }

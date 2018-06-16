@@ -4,7 +4,7 @@ import eu.bambz.fwc18simplebetsystem.domain.bets.api.BetForm
 import eu.bambz.fwc18simplebetsystem.domain.bets.query.BetsQueryConfig
 import eu.bambz.fwc18simplebetsystem.domain.bets.query.BetsQueryFacade
 import eu.bambz.fwc18simplebetsystem.domain.players.api.PlayerType
-import eu.bambz.fwc18simplebetsystem.domain.players.query.PlayersFacade
+import eu.bambz.fwc18simplebetsystem.domain.players.query.PlayersQueryFacade
 import spock.lang.Specification
 
 import java.time.LocalDateTime
@@ -19,7 +19,7 @@ class BetsSpec extends Specification {
 
         betsQueryFacade = new BetsQueryConfig().betsQueryFacade()
 
-        PlayersFacade playersFacade = Mock()
+        PlayersQueryFacade playersFacade = Mock()
         playersFacade.currentPlayer() >> PlayerType.M
 
         betsFacade = new BetsConfig().betsFacade(playersFacade)

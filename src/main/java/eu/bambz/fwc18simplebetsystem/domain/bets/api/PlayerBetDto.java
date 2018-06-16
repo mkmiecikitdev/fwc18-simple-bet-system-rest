@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class PlayerScoreDto {
+public class PlayerBetDto {
 
     private String name;
     private Integer team1Bet;
