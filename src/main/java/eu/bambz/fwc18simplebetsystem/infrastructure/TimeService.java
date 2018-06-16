@@ -13,14 +13,16 @@ public class TimeService {
 
     private final Clock clock;
 
+    private static final LocalDateTime REFERENCE_DATE_TIME = LocalDateTime.of(2018, 6, 15, 13, 45);
+    private static final ZoneId defaultZone = ZoneId.systemDefault();
+    private static final Clock FIXED_CLOCK = Clock.fixed(REFERENCE_DATE_TIME.atZone(defaultZone).toInstant(), defaultZone);
+
     public static TimeService defaultTimeService() {
         return new TimeService(Clock.systemDefaultZone());
     }
 
     public static TimeService testTimeService() {
-        final LocalDateTime REFERENCE_DATE_TIME = LocalDateTime.of(2018, 6, 15, 13, 45);
-        final ZoneId defaultZone = ZoneId.systemDefault();
-        final Clock FIXED_CLOCK = Clock.fixed(REFERENCE_DATE_TIME.atZone(defaultZone).toInstant(), defaultZone);
+
 
         return new TimeService(FIXED_CLOCK);
     }
