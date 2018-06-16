@@ -26,14 +26,12 @@ class Bet {
         return time.canBet(now);
     }
 
-    PlayerBet update(BetForm betForm, PlayerType playerType) {
+    void update(BetForm betForm, PlayerType playerType) {
         if(playerType == PlayerType.M) {
             player1Bet = player1Bet.update(betForm);
-            return player1Bet;
+        } else {
+            player2Bet = player2Bet.update(betForm);
         }
-
-        player2Bet = player2Bet.update(betForm);
-        return player2Bet;
     }
 
     Tuple4<Integer, Integer, Integer, Integer> betScores() {
