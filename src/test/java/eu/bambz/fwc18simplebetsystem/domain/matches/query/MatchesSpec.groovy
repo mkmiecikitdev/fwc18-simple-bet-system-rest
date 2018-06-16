@@ -30,18 +30,44 @@ class MatchesSpec extends Specification {
             list.size() == 2
 
             firstMatch.id == 1L
+
             firstMatch.team1.name == "Rosja"
             firstMatch.team1.score == 5
+
             firstMatch.team2.name == "Arabia"
             firstMatch.team2.score == 0
+
+            firstMatch.player1.name == "Michal"
+            firstMatch.player1.team1Bet == 3
+            firstMatch.player1.team2Bet == 1
+            firstMatch.player1.score == 1
+
+            firstMatch.player2.name == "Tomek"
+            firstMatch.player2.team1Bet == 2
+            firstMatch.player2.team2Bet == 1
+            firstMatch.player2.score == 1
+
             firstMatch.time == LocalDateTime.of(2018, 6, 14, 18, 0);
             !firstMatch.canBet
 
             secondMatch.id == 2L
+
             secondMatch.team1.name == "Egipt"
             secondMatch.team1.score == null
+
             secondMatch.team2.name == "Urugwaj"
             secondMatch.team2.score == null
+
+            secondMatch.player1.name == "Michal"
+            secondMatch.player1.team1Bet == 2
+            secondMatch.player1.team2Bet == 0
+            secondMatch.player1.score == null
+
+            secondMatch.player2.name == "Tomek"
+            secondMatch.player2.team1Bet == 0
+            secondMatch.player2.team2Bet == 1
+            secondMatch.player2.score == null
+
             secondMatch.time == LocalDateTime.of(2018, 6, 15, 14, 0);
             secondMatch.canBet
 
