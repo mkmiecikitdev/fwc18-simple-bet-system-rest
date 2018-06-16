@@ -7,15 +7,15 @@ import lombok.Value;
 @Value
 class PlayerBetSection {
 
-    private static final int SCORE_MAX = 4;
+    private static final int SCORE_MAX = 3;
     private static final int SCORE_STANDARD = 1;
     private static final int SCORE_NONE = 0;
 
     private enum Result { WIN, LOSE, DRAW }
 
-    private String playerName;
-    private Integer team1Bet;
-    private Integer team2Bet;
+    private final String playerName;
+    private final Integer team1Bet;
+    private final Integer team2Bet;
 
 
     Option<Integer> calculateScore(Integer team1Score, Integer team2Score) {

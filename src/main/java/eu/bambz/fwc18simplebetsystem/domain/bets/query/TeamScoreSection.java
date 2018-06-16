@@ -6,7 +6,7 @@ import lombok.Value;
 @Value
 class TeamScoreSection {
 
-    private TeamType teamType;
-    private Integer score;
+    private final TeamType teamType;
+    private final Integer score;
 
 }

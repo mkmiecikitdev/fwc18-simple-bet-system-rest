@@ -1,8 +1,9 @@
 package eu.bambz.fwc18simplebetsystem.domain.bets.query;
 
-import eu.bambz.fwc18simplebetsystem.domain.bets.api.MatchDto;
+import eu.bambz.fwc18simplebetsystem.domain.bets.api.BetDto;
 import eu.bambz.fwc18simplebetsystem.domain.bets.api.PlayerScoreDto;
 import eu.bambz.fwc18simplebetsystem.domain.bets.api.TeamDto;
+import eu.bambz.fwc18simplebetsystem.domain.bets.shared.MatchTime;
 import lombok.Builder;
 
 import java.time.LocalDateTime;
@@ -20,7 +21,7 @@ class BetView {
     private PlayerBetSection playerBetSection2;
 
 
-    MatchDto dto(LocalDateTime now) {
+    BetDto dto(LocalDateTime now) {
         TeamDto teamDto1 = new TeamDto(teamSection1.getTeamType().getLabel(), teamSection1.getScore());
         TeamDto teamDto2 = new TeamDto(teamSection2.getTeamType().getLabel(), teamSection2.getScore());
 
@@ -38,7 +39,7 @@ class BetView {
                 .score(playerBetSection2.calculateScore(teamDto1.getScore(), teamDto2.getScore()).getOrNull())
                 .build();
 
-        return MatchDto.builder()
+        return BetDto.builder()
                 .id(id)
                 .time(time.getTime())
                 .team1(teamDto1)

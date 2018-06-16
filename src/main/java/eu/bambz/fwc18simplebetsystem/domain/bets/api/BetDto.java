@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Builder
 @Getter
-public class MatchDto {
+public class BetDto {
 
     private long id;
     private LocalDateTime time;
