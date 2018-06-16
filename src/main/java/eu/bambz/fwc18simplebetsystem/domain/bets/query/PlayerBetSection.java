@@ -1,12 +1,11 @@
-package eu.bambz.fwc18simplebetsystem.domain.matches.query;
+package eu.bambz.fwc18simplebetsystem.domain.bets.query;
 
 
-import eu.bambz.fwc18simplebetsystem.domain.matches.api.PlayerScoreDto;
 import io.vavr.control.Option;
 import lombok.Value;
 
 @Value
-class BetMatchSection {
+class PlayerBetSection {
 
     private static final int SCORE_MAX = 4;
     private static final int SCORE_STANDARD = 1;

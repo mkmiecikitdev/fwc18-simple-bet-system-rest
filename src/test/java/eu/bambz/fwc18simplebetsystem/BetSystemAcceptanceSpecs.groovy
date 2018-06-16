@@ -9,14 +9,14 @@ class BetSystemAcceptanceSpecs extends Specification{
         when: 'I get /matches'
         then: 'I see all matches'
 
-        when 'I get /points'
+        when: 'I get /points'
         then: 'I see current points for me and second player'
 
-        when 'I put /match/{id} when can updating this match'
-        then 'I get updated match and 200'
+        when: 'I put /match/{id} when can updating this match'
+        then: 'I get updated match and 200'
 
-        when 'I put /match/{id}' when cannot updating''
-        then 'I get 4xx'
+        when: 'I put /match/{id} when cannot updating'
+        then: 'I get 4xx'
 
     }
 

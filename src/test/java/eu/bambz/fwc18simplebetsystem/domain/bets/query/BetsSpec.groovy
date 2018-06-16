@@ -1,20 +1,20 @@
-package eu.bambz.fwc18simplebetsystem.domain.matches.query
+package eu.bambz.fwc18simplebetsystem.domain.bets.query
 
 import spock.lang.Specification
 
 import java.time.LocalDateTime
 
-class MatchesSpec extends Specification {
+class BetsSpec extends Specification {
 
-    MatchesQueryFacade matchesQueryFacade
+    BetsQueryFacade matchesQueryFacade
 
     def setup() {
 
-        matchesQueryFacade = new MatchesQueryConfig().matchesQueryFacade()
+        matchesQueryFacade = new BetsQueryConfig().matchesQueryFacade()
 
     }
 
-    def " 'matches()' should return matches with real info about teams, date, result, score for users and flag that is it possible to betting yet" () {
+    def " 'bets()' should return matches with real info about teams, date, result, score for users and flag that is it possible to betting yet" () {
 
         given: "There is saved list of past and upcoming matches and now is 15.06.2018 13:45"
 

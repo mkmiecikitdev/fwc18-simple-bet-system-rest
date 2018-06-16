@@ -1,4 +1,4 @@
-package eu.bambz.fwc18simplebetsystem.domain.matches.query;
+package eu.bambz.fwc18simplebetsystem.domain.bets.query;
 
 
 import lombok.Value;

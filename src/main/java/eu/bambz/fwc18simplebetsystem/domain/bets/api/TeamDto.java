@@ -1,4 +1,4 @@
-package eu.bambz.fwc18simplebetsystem.domain.matches.api;
+package eu.bambz.fwc18simplebetsystem.domain.bets.api;
 
 
 import lombok.AllArgsConstructor;
