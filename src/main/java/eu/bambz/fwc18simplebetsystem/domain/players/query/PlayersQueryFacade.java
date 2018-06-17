@@ -8,9 +8,10 @@ import lombok.AllArgsConstructor;
 public class PlayersQueryFacade {
 
     private final PlayersQueryRepository queryRepository;
+    private final CurrentPlayerLoader currentPlayerLoader;
 
     public PlayerType currentPlayer() {
-        return null;
+        return currentPlayerLoader.load();
     }
 
     public PlayersSummaryDto playersSummary() {
