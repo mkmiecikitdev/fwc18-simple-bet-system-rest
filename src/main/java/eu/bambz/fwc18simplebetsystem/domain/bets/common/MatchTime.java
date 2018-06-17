@@ -1,4 +1,4 @@
-package eu.bambz.fwc18simplebetsystem.domain.bets.shared;
+package eu.bambz.fwc18simplebetsystem.domain.bets.common;
 
 
 import lombok.Value;

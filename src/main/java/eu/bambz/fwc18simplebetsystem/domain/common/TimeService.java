@@ -1,4 +1,4 @@
-package eu.bambz.fwc18simplebetsystem.infrastructure;
+package eu.bambz.fwc18simplebetsystem.domain.common;
 
 
 import lombok.AccessLevel;
@@ -22,8 +22,6 @@ public class TimeService {
     }
 
     public static TimeService testTimeService() {
-
-
         return new TimeService(FIXED_CLOCK);
     }
 

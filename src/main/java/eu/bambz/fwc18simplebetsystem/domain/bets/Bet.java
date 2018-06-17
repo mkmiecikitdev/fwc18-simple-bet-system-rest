@@ -2,7 +2,7 @@ package eu.bambz.fwc18simplebetsystem.domain.bets;
 
 
 import eu.bambz.fwc18simplebetsystem.domain.bets.api.BetForm;
-import eu.bambz.fwc18simplebetsystem.domain.bets.shared.MatchTime;
+import eu.bambz.fwc18simplebetsystem.domain.bets.common.MatchTime;
 import eu.bambz.fwc18simplebetsystem.domain.players.api.PlayerType;
 import io.vavr.Tuple;
 import io.vavr.Tuple4;

@@ -1,9 +1,12 @@
 package eu.bambz.fwc18simplebetsystem.domain.bets.query;
 
 import eu.bambz.fwc18simplebetsystem.domain.bets.api.BetDto;
-import eu.bambz.fwc18simplebetsystem.domain.bets.shared.MatchTime;
+import eu.bambz.fwc18simplebetsystem.domain.bets.api.BetNotFound;
+import eu.bambz.fwc18simplebetsystem.domain.bets.common.MatchTime;
+import eu.bambz.fwc18simplebetsystem.domain.common.AppError;
 import io.vavr.Tuple4;
 import io.vavr.collection.*;
+import io.vavr.control.Either;
 import io.vavr.control.Option;
 
 import java.time.LocalDateTime;
@@ -37,9 +40,9 @@ public class InMemoryBetsQueryRepository implements BetsQueryRepository {
     }
 
     @Override
-    public BetView findOrThrow(long id) {
+    public Either<AppError, BetView> load(long id) {
         return MAP.get(id)
-                .getOrElseThrow(RuntimeException::new);
+                .toEither(new BetNotFound(id));
     }
 
     public Option<BetDto> getDto(long id, LocalDateTime now) {

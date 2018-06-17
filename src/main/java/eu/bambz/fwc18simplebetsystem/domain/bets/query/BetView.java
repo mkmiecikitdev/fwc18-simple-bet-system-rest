@@ -3,7 +3,7 @@ package eu.bambz.fwc18simplebetsystem.domain.bets.query;
 import eu.bambz.fwc18simplebetsystem.domain.bets.api.BetDto;
 import eu.bambz.fwc18simplebetsystem.domain.bets.api.PlayerBetDto;
 import eu.bambz.fwc18simplebetsystem.domain.bets.api.TeamDto;
-import eu.bambz.fwc18simplebetsystem.domain.bets.shared.MatchTime;
+import eu.bambz.fwc18simplebetsystem.domain.bets.common.MatchTime;
 import eu.bambz.fwc18simplebetsystem.domain.players.api.PlayerType;
 import lombok.Builder;
 

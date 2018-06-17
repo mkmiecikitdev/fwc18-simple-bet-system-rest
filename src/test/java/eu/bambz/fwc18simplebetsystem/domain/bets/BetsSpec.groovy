@@ -96,13 +96,16 @@ class BetsSpec extends Specification {
             def id = 2L
             def form = new BetForm(4, 4)
 
-            def longOpt = betsFacade.bet(id, form)
-            def bet = betsQueryFacade.find(longOpt.get())
+            def returnedLong = betsFacade.bet(id, form)
+            def returnedBet = betsQueryFacade.find(returnedLong.get())
 
         then: "Bet is changed and returned"
 
-            !longOpt.isEmpty()
-            longOpt.get() == 2L
+            returnedLong.right()
+            returnedLong.get() == 2L
+
+            returnedBet.right()
+            def bet = returnedBet.get()
 
             bet.id == 2L
 
