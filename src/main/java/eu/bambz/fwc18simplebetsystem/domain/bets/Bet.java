@@ -6,8 +6,10 @@ import eu.bambz.fwc18simplebetsystem.domain.bets.common.MatchTime;
 import eu.bambz.fwc18simplebetsystem.domain.players.api.PlayerType;
 import io.vavr.Tuple;
 import io.vavr.Tuple4;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -15,6 +17,8 @@ import java.time.LocalDateTime;
 @Table(name = "bets")
 @Entity
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 class Bet {
 
     @Id

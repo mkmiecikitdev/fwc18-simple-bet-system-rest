@@ -5,7 +5,9 @@ import eu.bambz.fwc18simplebetsystem.domain.bets.api.PlayerBetDto;
 import eu.bambz.fwc18simplebetsystem.domain.bets.api.TeamDto;
 import eu.bambz.fwc18simplebetsystem.domain.bets.common.MatchTime;
 import eu.bambz.fwc18simplebetsystem.domain.players.api.PlayerType;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Immutable;
 
 import javax.persistence.*;
@@ -16,6 +18,8 @@ import java.time.LocalDateTime;
 @Immutable
 @Entity
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 class BetView {
 
     @Id
