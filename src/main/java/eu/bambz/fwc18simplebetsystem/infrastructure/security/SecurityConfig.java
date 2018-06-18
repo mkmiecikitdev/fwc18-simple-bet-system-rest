@@ -74,12 +74,11 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     Function0<PlayerType> currentPlayer() {
-        return Function0.constant(
+        return () ->
                 (PlayerType) SecurityContextHolder
                         .getContext()
                         .getAuthentication()
-                        .getPrincipal()
-        );
+                        .getPrincipal();
     }
 
 }

@@ -9,12 +9,12 @@ import org.springframework.context.annotation.Configuration;
 public class PlayersQueryConfig {
 
     public PlayersQueryFacade playersQueryFacade() {
-        return new PlayersQueryFacade(new InMemoryPlayersQueryRepository(), () -> PlayerType.M);
+        return new PlayersQueryFacade(() -> PlayerType.M);
     }
 
     @Bean
-    public PlayersQueryFacade playersQueryFacade(JpaPlayersQueryRepository jpaPlayersQueryRepository, Function0<PlayerType> currentPlayerProvider) {
-        return new PlayersQueryFacade(jpaPlayersQueryRepository, currentPlayerProvider);
+    public PlayersQueryFacade playersQueryFacade(Function0<PlayerType> currentPlayerProvider) {
+        return new PlayersQueryFacade(currentPlayerProvider);
     }
 
 }

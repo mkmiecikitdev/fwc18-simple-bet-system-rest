@@ -8,10 +8,7 @@ import eu.bambz.fwc18simplebetsystem.domain.players.api.PlayerType;
 import lombok.Builder;
 import org.hibernate.annotations.Immutable;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 
@@ -25,18 +22,46 @@ class BetView {
     private long id;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="time",
+                    column=@Column(name="match_time")),
+    })
     private MatchTime time;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="teamType",
+                    column=@Column(name="team_1_type")),
+            @AttributeOverride(name="score",
+                    column=@Column(name="team_1_score")),
+    })
     private TeamScoreView team1View;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="teamType",
+                    column=@Column(name="team_2_type")),
+            @AttributeOverride(name="score",
+                    column=@Column(name="team_2_score")),
+    })
     private TeamScoreView team2View;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="team1Bet",
+                    column=@Column(name="team_1_bet_player1")),
+            @AttributeOverride(name="team2Bet",
+                    column=@Column(name="team_2_bet_player1")),
+    })
     private PlayerBetsView player1BetView;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="team1Bet",
+                    column=@Column(name="team_1_bet_player2")),
+            @AttributeOverride(name="team2Bet",
+                    column=@Column(name="team_2_bet_player2")),
+    })
     private PlayerBetsView player2BetView;
 
 

@@ -18,6 +18,7 @@ public class User implements UserDetails {
 
     @Id
     @Enumerated(EnumType.STRING)
+    @Column(name = "player_type")
     private PlayerType playerType;
 
     @Column(nullable = false)

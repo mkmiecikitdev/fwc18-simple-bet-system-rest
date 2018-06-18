@@ -22,12 +22,28 @@ class Bet {
     private long id;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="time",
+                    column=@Column(name="match_time")),
+    })
     private MatchTime time;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="team1Bet",
+                    column=@Column(name="team_1_bet_player1")),
+            @AttributeOverride(name="team2Bet",
+                    column=@Column(name="team_2_bet_player1")),
+    })
     private PlayerBet player1Bet;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="team1Bet",
+                    column=@Column(name="team_1_bet_player2")),
+            @AttributeOverride(name="team2Bet",
+                    column=@Column(name="team_2_bet_player2")),
+    })
     private PlayerBet player2Bet;
 
     boolean canUpdate(LocalDateTime now) {
