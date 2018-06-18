@@ -3,6 +3,9 @@ package eu.bambz.fwc18simplebetsystem.domain.bets;
 import eu.bambz.fwc18simplebetsystem.domain.bets.api.BetForm;
 import lombok.Value;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 @Value
 class PlayerBet {
 

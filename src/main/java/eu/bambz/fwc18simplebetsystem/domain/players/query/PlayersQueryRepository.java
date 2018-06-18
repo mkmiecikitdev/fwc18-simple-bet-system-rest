@@ -1,6 +1,6 @@
 package eu.bambz.fwc18simplebetsystem.domain.players.query;
 
-public interface PlayersQueryRepository {
+interface PlayersQueryRepository {
 
     int player1Score();
 

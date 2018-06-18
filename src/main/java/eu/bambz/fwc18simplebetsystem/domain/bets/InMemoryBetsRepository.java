@@ -10,7 +10,7 @@ import io.vavr.control.Either;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class InMemoryBetsRepository implements BetsRepository {
+class InMemoryBetsRepository implements BetsRepository {
 
     private final InMemoryBetsQueryRepository queryRepository;
     private final TimeService timeService;
@@ -33,7 +33,7 @@ public class InMemoryBetsRepository implements BetsRepository {
     }
 
     @Override
-    public void save(Bet bet) {
+    public void update(Bet bet) {
         queryRepository.saveDto(bet.getId(), bet.betScores());
     }
 

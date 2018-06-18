@@ -6,19 +6,37 @@ import eu.bambz.fwc18simplebetsystem.domain.bets.api.TeamDto;
 import eu.bambz.fwc18simplebetsystem.domain.bets.common.MatchTime;
 import eu.bambz.fwc18simplebetsystem.domain.players.api.PlayerType;
 import lombok.Builder;
+import org.hibernate.annotations.Immutable;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 
+
+@Table(name = "bets")
+@Immutable
+@Entity
 @Builder
 class BetView {
 
+    @Id
     private long id;
+
+    @Embedded
     private MatchTime time;
 
+    @Embedded
     private TeamScoreView team1View;
+
+    @Embedded
     private TeamScoreView team2View;
 
+    @Embedded
     private PlayerBetsView player1BetView;
+
+    @Embedded
     private PlayerBetsView player2BetView;
 
 

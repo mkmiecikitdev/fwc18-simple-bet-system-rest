@@ -9,17 +9,25 @@ import io.vavr.Tuple4;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Table(name = "bets")
+@Entity
 @Builder
 class Bet {
 
+    @Id
     @Getter
     private long id;
 
+    @Embedded
     private MatchTime time;
 
+    @Embedded
     private PlayerBet player1Bet;
+
+    @Embedded
     private PlayerBet player2Bet;
 
     boolean canUpdate(LocalDateTime now) {

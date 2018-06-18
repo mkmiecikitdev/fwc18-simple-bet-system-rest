@@ -1,6 +1,6 @@
 package eu.bambz.fwc18simplebetsystem.domain.players.query;
 
-public class InMemoryPlayersQueryRepository implements PlayersQueryRepository {
+class InMemoryPlayersQueryRepository implements PlayersQueryRepository {
 
 
     @Override

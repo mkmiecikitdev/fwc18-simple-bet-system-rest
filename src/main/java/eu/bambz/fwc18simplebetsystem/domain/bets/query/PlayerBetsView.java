@@ -4,6 +4,9 @@ package eu.bambz.fwc18simplebetsystem.domain.bets.query;
 import io.vavr.control.Option;
 import lombok.Value;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 @Value
 class PlayerBetsView {
 

@@ -3,8 +3,10 @@ package eu.bambz.fwc18simplebetsystem.domain.bets.common;
 
 import lombok.Value;
 
+import javax.persistence.Embeddable;
 import java.time.LocalDateTime;
 
+@Embeddable
 @Value
 public class MatchTime {
 

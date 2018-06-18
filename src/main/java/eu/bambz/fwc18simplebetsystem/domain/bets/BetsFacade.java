@@ -27,7 +27,7 @@ public class BetsFacade {
             return Either.left(new CannotBet());
 
         bet.update(betForm, playersQueryFacade.currentPlayer());
-        betsRepository.save(bet);
+        betsRepository.update(bet);
         return Either.right(bet.getId());
     }
 
