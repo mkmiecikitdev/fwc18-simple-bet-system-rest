@@ -3,10 +3,12 @@ package eu.bambz.fwc18simplebetsystem.domain.bets.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 public class BetForm {

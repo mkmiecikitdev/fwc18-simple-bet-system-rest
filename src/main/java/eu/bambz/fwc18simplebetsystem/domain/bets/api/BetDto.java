@@ -1,5 +1,7 @@
 package eu.bambz.fwc18simplebetsystem.domain.bets.api;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import eu.bambz.fwc18simplebetsystem.infrastructure.rest.JsonUtils;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -10,6 +12,8 @@ import java.time.LocalDateTime;
 public class BetDto {
 
     private long id;
+
+    @JsonFormat(pattern = JsonUtils.DATE_FORMAT)
     private LocalDateTime time;
     private TeamDto team1;
     private TeamDto team2;

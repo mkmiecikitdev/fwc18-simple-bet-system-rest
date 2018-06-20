@@ -1,11 +1,15 @@
 package eu.bambz.fwc18simplebetsystem.infrastructure.security;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 
 
-@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 class LoginFormDto {
 
     @NotNull
