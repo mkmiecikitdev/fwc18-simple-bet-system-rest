@@ -1,11 +1,11 @@
-package eu.bambz.fwc18simplebetsystem.infrastructure.rest;
+package eu.bambz.fwc18simplebetsystem.infrastructure.rest.controllers;
 
 import eu.bambz.fwc18simplebetsystem.domain.bets.BetsFacade;
 import eu.bambz.fwc18simplebetsystem.domain.bets.api.BetDto;
 import eu.bambz.fwc18simplebetsystem.domain.bets.api.BetForm;
 import eu.bambz.fwc18simplebetsystem.domain.bets.query.BetsQueryFacade;
+import eu.bambz.fwc18simplebetsystem.infrastructure.rest.ResponseResolver;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +18,7 @@ class BetsController {
 
     private final BetsFacade betsFacade;
     private final BetsQueryFacade betsQueryFacade;
+    private final ResponseResolver responseResolver;
 
     @GetMapping("/bets")
     List<BetDto> bets() {
@@ -26,9 +27,9 @@ class BetsController {
 
     @PostMapping("/bet/{id}")
     ResponseEntity<Object> bet(@PathVariable long id, @RequestBody @Valid BetForm betForm) {
-        return betsFacade.bet(id, betForm)
-                .map(betId -> new ResponseEntity<Object>(betId, HttpStatus.OK))
-                .getOrElseGet(error -> new ResponseEntity<>(error, HttpStatus.BAD_REQUEST));
+        return responseResolver.resolve(
+                betsFacade.bet(id, betForm)
+        );
     }
 
 

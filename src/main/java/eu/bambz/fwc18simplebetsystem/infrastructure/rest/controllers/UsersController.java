@@ -1,4 +1,4 @@
-package eu.bambz.fwc18simplebetsystem.infrastructure.rest;
+package eu.bambz.fwc18simplebetsystem.infrastructure.rest.controllers;
 
 import eu.bambz.fwc18simplebetsystem.domain.players.api.PlayerType;
 import eu.bambz.fwc18simplebetsystem.domain.players.query.PlayersQueryFacade;
