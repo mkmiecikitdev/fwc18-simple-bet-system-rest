@@ -34,12 +34,14 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .cors().and()
                 .authorizeRequests()
+                .antMatchers("/css/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/login").permitAll()
+                .antMatchers(HttpMethod.GET, "/").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new ExceptionHandlerFilter(objectMapper), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(new JWTLoginFilter("/login", authenticationManager()),
+                .addFilterBefore(new JWTLoginFilter("/api/login", authenticationManager()),
                         UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new JWTAuthenticationFilter(),
                         UsernamePasswordAuthenticationFilter.class);

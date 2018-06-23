@@ -14,6 +14,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
+@RequestMapping("/api")
 class BetsController {
 
     private final BetsFacade betsFacade;
