@@ -5,10 +5,12 @@ import eu.bambz.fwc18simplebetsystem.domain.bets.api.PlayerBetDto;
 import eu.bambz.fwc18simplebetsystem.domain.bets.api.TeamDto;
 import eu.bambz.fwc18simplebetsystem.domain.bets.common.MatchTime;
 import eu.bambz.fwc18simplebetsystem.domain.players.api.PlayerType;
+import io.vavr.control.Option;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Immutable;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -50,6 +52,7 @@ class BetView {
     })
     private TeamScoreView team2View;
 
+    @Nullable
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name="team1Bet",
@@ -59,6 +62,7 @@ class BetView {
     })
     private PlayerBetsView player1BetView;
 
+    @Nullable
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name="team1Bet",
@@ -73,18 +77,21 @@ class BetView {
         TeamDto teamDto1 = new TeamDto(team1View.getTeamType().getLabel(), team1View.getScore());
         TeamDto teamDto2 = new TeamDto(team2View.getTeamType().getLabel(), team2View.getScore());
 
+        Option<PlayerBetsView> player1bet = Option.of(player1BetView);
+        Option<PlayerBetsView> player2bet = Option.of(player2BetView);
+
         PlayerBetDto playerBetDto1 = PlayerBetDto.builder()
                 .name(PlayerType.M.getLabel())
-                .team1Bet(player1BetView.getTeam1Bet())
-                .team2Bet(player1BetView.getTeam2Bet())
-                .score(player1BetView.calculateScore(teamDto1.getScore(), teamDto2.getScore()).getOrNull())
+                .team1Bet(player1bet.map(PlayerBetsView::getTeam1Bet).getOrNull())
+                .team2Bet(player1bet.map(PlayerBetsView::getTeam2Bet).getOrNull())
+                .score(player1bet.flatMap( p -> p.calculateScore(teamDto1.getScore(), teamDto2.getScore())).getOrNull())
                 .build();
 
         PlayerBetDto playerBetDto2 = PlayerBetDto.builder()
                 .name(PlayerType.T.getLabel())
-                .team1Bet(player2BetView.getTeam1Bet())
-                .team2Bet(player2BetView.getTeam2Bet())
-                .score(player2BetView.calculateScore(teamDto1.getScore(), teamDto2.getScore()).getOrNull())
+                .team1Bet(player2bet.map(PlayerBetsView::getTeam1Bet).getOrNull())
+                .team2Bet(player2bet.map(PlayerBetsView::getTeam2Bet).getOrNull())
+                .score(player2bet.flatMap( p -> p.calculateScore(teamDto1.getScore(), teamDto2.getScore())).getOrNull())
                 .build();
 
         return BetDto.builder()

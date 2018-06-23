@@ -54,7 +54,7 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
                 registry
                         .addMapping("/**")
                         .allowedOrigins(
-                                "http://localhost:8080"
+                                "http://localhost:4200"
                         )
                         .allowedMethods("PUT", "POST", "GET", "OPTIONS")
                         .allowedHeaders("*")

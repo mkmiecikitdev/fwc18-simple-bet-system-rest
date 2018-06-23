@@ -6,6 +6,7 @@ import eu.bambz.fwc18simplebetsystem.domain.bets.common.MatchTime;
 import eu.bambz.fwc18simplebetsystem.domain.players.api.PlayerType;
 import io.vavr.Tuple;
 import io.vavr.Tuple4;
+import io.vavr.control.Option;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -56,10 +57,16 @@ class Bet {
 
     void update(BetForm betForm, PlayerType playerType) {
         if(playerType == PlayerType.M) {
-            player1Bet = player1Bet.update(betForm);
+            player1Bet = getUpdatedBet(Option.of(player1Bet), betForm);
         } else {
-            player2Bet = player2Bet.update(betForm);
+            player2Bet = getUpdatedBet(Option.of(player2Bet), betForm);
         }
+    }
+
+    private PlayerBet getUpdatedBet(Option<PlayerBet> playerBetOpt, BetForm betForm) {
+        return playerBetOpt
+                .map(p -> p.update(betForm))
+                .getOrElse(PlayerBet.of(betForm));
     }
 
     Tuple4<Integer, Integer, Integer, Integer> betScores() {

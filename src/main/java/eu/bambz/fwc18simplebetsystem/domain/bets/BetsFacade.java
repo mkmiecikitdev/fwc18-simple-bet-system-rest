@@ -1,7 +1,9 @@
 package eu.bambz.fwc18simplebetsystem.domain.bets;
 
+import eu.bambz.fwc18simplebetsystem.domain.bets.api.BetDto;
 import eu.bambz.fwc18simplebetsystem.domain.bets.api.BetForm;
 import eu.bambz.fwc18simplebetsystem.domain.bets.api.CannotBet;
+import eu.bambz.fwc18simplebetsystem.domain.bets.query.BetsQueryFacade;
 import eu.bambz.fwc18simplebetsystem.domain.common.AppError;
 import eu.bambz.fwc18simplebetsystem.domain.common.TimeService;
 import eu.bambz.fwc18simplebetsystem.domain.players.query.PlayersQueryFacade;
@@ -11,14 +13,16 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class BetsFacade {
 
+    private final BetsQueryFacade betsQueryFacade;
     private final BetsRepository betsRepository;
     private final TimeService timeService;
     private final PlayersQueryFacade playersQueryFacade;
 
-    public Either<AppError, Long> bet(long id, BetForm betForm) {
+    public Either<AppError, BetDto> bet(long id, BetForm betForm) {
 
         return betsRepository.load(id)
-                .flatMap(bet -> update(bet, betForm));
+                .flatMap(bet -> update(bet, betForm))
+                .flatMap(betsQueryFacade::find);
 
     }
 

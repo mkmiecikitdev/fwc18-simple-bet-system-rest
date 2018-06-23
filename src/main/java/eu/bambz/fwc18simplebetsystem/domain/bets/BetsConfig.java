@@ -1,5 +1,7 @@
 package eu.bambz.fwc18simplebetsystem.domain.bets;
 
+import eu.bambz.fwc18simplebetsystem.domain.bets.query.BetsQueryConfig;
+import eu.bambz.fwc18simplebetsystem.domain.bets.query.BetsQueryFacade;
 import eu.bambz.fwc18simplebetsystem.domain.bets.query.InMemoryBetsQueryRepository;
 import eu.bambz.fwc18simplebetsystem.domain.players.query.PlayersQueryFacade;
 import eu.bambz.fwc18simplebetsystem.domain.common.TimeService;
@@ -12,14 +14,16 @@ class BetsConfig {
     BetsFacade betsFacade(PlayersQueryFacade playersQueryFacade) {
         TimeService timeService = TimeService.testTimeService();
         return new BetsFacade(
+                new BetsQueryConfig().betsQueryFacade(),
                 new InMemoryBetsRepository(new InMemoryBetsQueryRepository(), timeService),
                 timeService,
                 playersQueryFacade);
     }
 
     @Bean
-    BetsFacade betsFacade(PlayersQueryFacade playersQueryFacade, JpaBetsRepository jpaBetsRepository) {
+    BetsFacade betsFacade(BetsQueryFacade betsQueryFacade, PlayersQueryFacade playersQueryFacade, JpaBetsRepository jpaBetsRepository) {
         return new BetsFacade(
+                betsQueryFacade,
                 jpaBetsRepository,
                 TimeService.defaultTimeService(),
                 playersQueryFacade);

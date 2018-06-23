@@ -22,7 +22,7 @@ class PlayerBetsView {
 
     Option<Integer> calculateScore(Integer team1Score, Integer team2Score) {
 
-        if(team1Score == null || team2Score == null)
+        if(isNotBet() || team1Score == null || team2Score == null)
             return Option.none();
 
         int score1 = team1Score;
@@ -45,6 +45,10 @@ class PlayerBetsView {
             return Result.WIN;
 
         return Result.LOSE;
+    }
+
+    private boolean isNotBet() {
+        return team1Bet == null || team2Bet == null;
     }
 
 }
