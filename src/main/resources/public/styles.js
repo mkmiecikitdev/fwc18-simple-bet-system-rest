@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#container {\n  display: -ms-grid;\n  display: grid;\n  -ms-grid-columns: 70px auto;\n      grid-template-columns: 70px auto;\n  height: 100%;\n}\n\nul {\n  list-style: none;\n}\n"
+module.exports = "#container {\n  display: -ms-grid;\n  display: grid;\n  -ms-grid-columns: 70px auto;\n      grid-template-columns: 70px auto;\n  height: 100%;\n}\n\nul {\n  list-style: none;\n}\n\n\n"
 
 /***/ }),
 

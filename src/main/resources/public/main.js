@@ -75,7 +75,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "h1 {\n  color: #369;\n  font-family: Arial, Helvetica, sans-serif;\n  font-size: 250%;\n}\n"
+module.exports = ""
 
 /***/ }),
 
@@ -205,7 +205,7 @@ module.exports = ".bet-details {\n  padding: 10px;\n  margin: 10px;\n  font-size
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"bet-details\">\n\n  <span>Termin: {{bet.time}}</span>\n\n  <br>\n\n  <span>{{bet.team1.name}} {{bet.team1.score}} - {{bet.team2.score}} {{bet.team2.name}}</span>\n\n  <br>\n\n  <span>{{bet.player1.name}} typ: {{bet.player1.team1Bet}} - {{bet.player1.team2Bet}}\n    <span *ngIf=\"bet.player1.score\"><b> - punkty: {{bet.player1.score}}</b></span>\n  </span>\n\n  <br>\n\n  <span>{{bet.player2.name}} typ: {{bet.player2.team1Bet}} - {{bet.player2.team2Bet}}\n    <span *ngIf=\"bet.player2.score\"><b> - punkty: {{bet.player2.score}}</b></span>\n  </span>\n\n  <div *ngIf=\"bet.canBet\">\n    <label>\n      <input [(ngModel)]=\"betForm.team1Bet\" placeholder={{bet.team1.name}} type=\"number\">\n    </label>\n\n    <span> - </span>\n\n    <label>\n      <input [(ngModel)]=\"betForm.team2Bet\" placeholder={{bet.team2.name}} type=\"number\">\n    </label>\n\n    <button (click)=\"sendBet()\">submit</button>\n  </div>\n\n\n\n</div>\n"
+module.exports = "<div class=\"bet-details\">\n\n  <span>Termin: {{bet.time}}</span>\n\n  <br>\n\n  <span>{{bet.team1.name}} {{bet.team1.score}} - {{bet.team2.score}} {{bet.team2.name}}</span>\n\n  <br>\n\n  <span>{{bet.player1.name}} typ: {{bet.player1.team1Bet}} - {{bet.player1.team2Bet}}\n    <span *ngIf=\"bet.player1.score != null\"><b> - punkty: {{bet.player1.score}}</b></span>\n  </span>\n\n  <br>\n\n  <span>{{bet.player2.name}} typ: {{bet.player2.team1Bet}} - {{bet.player2.team2Bet}}\n    <span *ngIf=\"bet.player2.score != null\"><b> - punkty: {{bet.player2.score}}</b></span>\n  </span>\n\n  <div *ngIf=\"bet.canBet\">\n    <label>\n      <input [(ngModel)]=\"betForm.team1Bet\" placeholder={{bet.team1.name}} type=\"number\">\n    </label>\n\n    <span> - </span>\n\n    <label>\n      <input [(ngModel)]=\"betForm.team2Bet\" placeholder={{bet.team2.name}} type=\"number\">\n    </label>\n\n    <button (click)=\"sendBet()\">submit</button>\n  </div>\n\n\n\n</div>\n"
 
 /***/ }),
 
@@ -310,7 +310,7 @@ var PlayerData = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".bets-list {\n  display: inline-flex;\n  width: 100%;\n}\n\n.bets-column {\n  width: 50%;\n  margin: 5px;\n}\n\n.bets-new {\n  background-color: lightgreen;\n}\n\n.bets-old {\n  background-color: indianred;\n}\n"
+module.exports = ".bets-list {\n  display: inline-flex;\n  width: 100%;\n}\n\n.bets-column {\n  width: 50%;\n  margin: 5px;\n}\n\n.bets-new {\n  background-color: lightgreen;\n}\n\n.bets-old {\n  background-color: indianred;\n}\n\n.main_button {\n  width: 250px;\n  height: 50px;\n}\n\n"
 
 /***/ }),
 
@@ -321,7 +321,7 @@ module.exports = ".bets-list {\n  display: inline-flex;\n  width: 100%;\n}\n\n.b
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<button (click)=\"logout()\">logout</button>\n\n<div class=\"bets-list\">\n\n  <div class=\"bets-column\">\n    <div *ngFor=\"let bet of newBets\" class=\"bets-new\">\n      <app-bet-details [bet]=\"bet\" ></app-bet-details>\n    </div>\n  </div>\n\n  <div class=\"bets-column\">\n    <div *ngFor=\"let bet of oldBets\" class=\"bets-old\">\n      <app-bet-details [bet]=\"bet\" ></app-bet-details>\n    </div>\n  </div>\n\n</div>\n\n\n"
+module.exports = "\n<button class=\"main_button\" (click)=\"logout()\">logout</button>\n<button class=\"main_button\" (click)=\"loadBets()\">refresh</button>\n\n<div class=\"bets-list\">\n\n  <div class=\"bets-column\">\n    <div *ngFor=\"let bet of newBets\" class=\"bets-new\">\n      <app-bet-details [bet]=\"bet\" ></app-bet-details>\n    </div>\n  </div>\n\n  <div class=\"bets-column\">\n    <div *ngFor=\"let bet of oldBets\" class=\"bets-old\">\n      <app-bet-details [bet]=\"bet\" ></app-bet-details>\n    </div>\n  </div>\n\n</div>\n\n\n"
 
 /***/ }),
 
@@ -375,6 +375,8 @@ var BetsComponent = /** @class */ (function () {
         this.router.navigateByUrl('/login');
     };
     BetsComponent.prototype.setLists = function (bets) {
+        this.newBets = [];
+        this.oldBets = [];
         for (var _i = 0, bets_1 = bets; _i < bets_1.length; _i++) {
             var bet = bets_1[_i];
             if (bet.canBet) {
