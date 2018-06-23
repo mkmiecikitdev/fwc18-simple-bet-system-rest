@@ -194,7 +194,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".bet-details {\n  padding: 10px;\n  margin-top: 10px;\n  background-color: lightgreen;\n  font-size: 20px;\n}\n\n\n"
+module.exports = ".bet-details {\n  padding: 10px;\n  margin: 10px;\n  font-size: 20px;\n  height: 125px;\n}\n\n\n\n"
 
 /***/ }),
 
@@ -310,7 +310,7 @@ var PlayerData = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".bets-list {\n  display: inline-flex;\n  width: 100%;\n}\n\n.bets-column {\n  width: 50%;\n  margin: 5px;\n}\n\n.bets-new {\n  background-color: lightgreen;\n}\n\n.bets-old {\n  background-color: indianred;\n}\n"
 
 /***/ }),
 
@@ -321,7 +321,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<button (click)=\"logout()\">logout</button>\n\n<ul class=\"bet_list\">\n  <li *ngFor=\"let bet of bets\">\n    <app-bet-details [bet]=\"bet\"></app-bet-details>\n  </li>\n</ul>\n"
+module.exports = "<button (click)=\"logout()\">logout</button>\n\n<div class=\"bets-list\">\n\n  <div class=\"bets-column\">\n    <div *ngFor=\"let bet of newBets\" class=\"bets-new\">\n      <app-bet-details [bet]=\"bet\" ></app-bet-details>\n    </div>\n  </div>\n\n  <div class=\"bets-column\">\n    <div *ngFor=\"let bet of oldBets\" class=\"bets-old\">\n      <app-bet-details [bet]=\"bet\" ></app-bet-details>\n    </div>\n  </div>\n\n</div>\n\n\n"
 
 /***/ }),
 
@@ -354,7 +354,8 @@ var BetsComponent = /** @class */ (function () {
     function BetsComponent(dataService, router) {
         this.dataService = dataService;
         this.router = router;
-        this.bets = [];
+        this.newBets = [];
+        this.oldBets = [];
     }
     BetsComponent.prototype.ngOnInit = function () {
         if (_data_service__WEBPACK_IMPORTED_MODULE_1__["DataService"].isUserLogin()) {
@@ -367,11 +368,22 @@ var BetsComponent = /** @class */ (function () {
     BetsComponent.prototype.loadBets = function () {
         var _this = this;
         this.dataService.bets()
-            .subscribe(function (response) { return _this.bets = response; });
+            .subscribe(function (response) { return _this.setLists(response); });
     };
     BetsComponent.prototype.logout = function () {
         _data_service__WEBPACK_IMPORTED_MODULE_1__["DataService"].logout();
         this.router.navigateByUrl('/login');
+    };
+    BetsComponent.prototype.setLists = function (bets) {
+        for (var _i = 0, bets_1 = bets; _i < bets_1.length; _i++) {
+            var bet = bets_1[_i];
+            if (bet.canBet) {
+                this.newBets.push(bet);
+            }
+            else {
+                this.oldBets.push(bet);
+            }
+        }
     };
     BetsComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
